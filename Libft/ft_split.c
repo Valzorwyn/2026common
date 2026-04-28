@@ -1,17 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_split.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bajankov <bajankov@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/04/28 17:32:57 by bajankov          #+#    #+#             */
+/*   Updated: 2026/04/28 17:32:57 by bajankov         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
-static int	ft_split_is_sep(char c, char *charset)
+static int	ft_split_is_sep(char c, char delimiter)
 {
-	int	ii;
-
-	ii = -1;
-	while (charset[++ii])
-		if (c == charset[ii])
-			return (1);
+	if (c == delimiter)
+		return (1);
 	return (0);
 }
 
-static int	ft_split_sep_count(char *str, char *charset)
+static int	ft_split_sep_count(char const *str, char c)
 {
 	int	ii;
 	int	sep_count;
@@ -20,25 +28,28 @@ static int	ft_split_sep_count(char *str, char *charset)
 	ii = 0;
 	while (str[ii])
 	{
-		if (!ft_split_is_sep(str[ii], charset))
+		if (!ft_split_is_sep(str[ii], c))
 		{
 			sep_count++;
-			while (str[ii] && !ft_split_is_sep(str[ii], charset))
+			while (str[ii] && !ft_split_is_sep(str[ii], c))
 				ii++;
 		}
-		ii++;
+		else
+		{
+			ii++;
+		}
 	}
 	return (sep_count);
 }
 
-static char	*ft_split_strdup(char *src, char *charset)
+static char	*ft_split_strdup(char const *src, char c)
 {
 	int		src_len;
 	int		ii;
 	char	*word;
 
 	src_len = 0;
-	while (src[src_len] && !ft_split_is_sep(src[src_len], charset))
+	while (src[src_len] && !ft_split_is_sep(src[src_len], c))
 		src_len++;
 	word = malloc((src_len + 1) * sizeof (char));
 	if (!word)
@@ -49,14 +60,14 @@ static char	*ft_split_strdup(char *src, char *charset)
 	return (word[src_len] = '\0', word);
 }
 
-char	**ft_split(char *str, char *charset)
+char	**ft_split(char const *str, char c)
 {
 	int		ii;
 	int		jj;
 	int		sep_count;
 	char	**res;
 
-	sep_count = ft_split_sep_count(str, charset);
+	sep_count = ft_split_sep_count(str, c);
 	ii = 0;
 	jj = 0;
 	res = malloc((sep_count + 1) * sizeof(char *));
@@ -64,12 +75,12 @@ char	**ft_split(char *str, char *charset)
 		return (NULL);
 	while (str[ii])
 	{
-		while (str[ii] && ft_split_is_sep(str[ii], charset))
+		while (str[ii] && ft_split_is_sep(str[ii], c))
 			++ii;
-		while (str[ii] && !ft_split_is_sep(str[ii], charset))
+		while (str[ii] && !ft_split_is_sep(str[ii], c))
 		{
-			res[jj++] = ft_split_strdup(&str[ii], charset);
-			while (str[ii] && !ft_split_is_sep(str[ii], charset))
+			res[jj++] = ft_split_strdup(&str[ii], c);
+			while (str[ii] && !ft_split_is_sep(str[ii], c))
 				++ii;
 		}
 	}

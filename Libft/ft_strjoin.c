@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bajankov <bajankov@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/04/28 17:33:15 by bajankov          #+#    #+#             */
+/*   Updated: 2026/04/28 17:33:15 by bajankov         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
-static char	*ft_strcat(char *dest, char *src)
+static char	*ft_strcat(char *dest, char const *src)
 {
 	int	ii;
 	int	jj;
@@ -17,28 +29,16 @@ static char	*ft_strcat(char *dest, char *src)
 	return (dest[ii] = '\0', dest);
 }
 
-char	*ft_strjoin(int size, char **strs, char *sep)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
 	int		ii;
 	int		sum_len;
 	char	*res;
 
-	if (size == 0)
-		return (ft_calloc(1, 1));
-	if (size < 0)
-		return (NULL);
-	ii = -1;
-	sum_len = 0;
-	while (++ii < size)
-		sum_len += ft_strlen(strs[ii]);
-	sum_len += (ft_strlen(sep) * (size - 1));
+	sum_len = ft_strlen(s1) + ft_strlen(s2);
 	res = ft_calloc((sum_len + 1), sizeof(char));
 	ii = -1;
-	while (++ii < size)
-	{
-		ft_strcat(res, strs[ii]);
-		if (ii < size - 1)
-			ft_strcat(res, sep);
-	}
+	ft_strcat(res, s1);
+	ft_strcat(res, s2);
 	return (res);
 }
