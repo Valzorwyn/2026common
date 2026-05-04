@@ -123,7 +123,7 @@ typedef struct s_list
 Claude (Anthropic) was used during this project for the following:
 
 - **Code review** — analysing completed functions for correctness, edge cases (e.g. `INT_MIN` handling in `ft_putnbr_fd` and `ft_itoa`), and potential memory leaks.
-- **Style consistency** — verifying that newly written functions matched the established personal coding style (loop variables `ii`/`jj`, `while (arr[++ii])` pattern, comma-operator returns).
+- **Style consistency** — verifying that newly written functions matched the established personal coding style for readability purposes.
 - **`ft_split` optimisation** — discussing double-traversal issues, redundant length recomputation, and partial `malloc` failure cleanup.
 - **README generation** — drafting and structuring this document based on the source files and subject requirements.
 
