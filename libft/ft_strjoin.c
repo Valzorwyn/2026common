@@ -31,13 +31,11 @@ static char	*ft_strcat(char *dest, char const *src)
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
-	int		ii;
 	int		sum_len;
 	char	*res;
 
 	sum_len = ft_strlen(s1) + ft_strlen(s2);
 	res = ft_calloc((sum_len + 1), sizeof(char));
-	ii = -1;
 	ft_strcat(res, s1);
 	ft_strcat(res, s2);
 	return (res);
