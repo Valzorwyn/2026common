@@ -12,6 +12,12 @@
 
 #include "get_next_line.h"
 
+/*
+	Loops calling read(fd, buf, BUFFER_SIZE) and appending each chunk to the stash via getnext_strjoin
+		(which frees the old stash each time, so you never have two copies alive at once).
+	Stops as soon as a \n is found in the stash, or read returns 0 (EOF) or -1 (error).
+*/
+
 static char	*read_until_newline(int fd, char **stash)
 {
 	char	*buf;
@@ -40,6 +46,11 @@ static char	*read_until_newline(int fd, char **stash)
 	return (free(buf), *stash);
 }
 
+/*
+	Scans the stash to find the end of the first line (up to and including \n, or to \0 at EOF), 
+		allocates a new string, copies those characters in, and returns it.
+	The stash is untouched.
+*/
 static char	*extract_line(char *stash)
 {
 	int		len;
@@ -61,6 +72,11 @@ static char	*extract_line(char *stash)
 		line[ii] = stash[ii];
 	return (line);
 }
+
+/*
+	Frees the stash and returns a fresh allocation of everything after the \n.
+	That becomes the new stash for the next call.
+*/
 
 static char	*save_remaining(char *stash)
 {
