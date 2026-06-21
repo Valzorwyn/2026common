@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bjankovi <bjankovi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bajankov <bajankov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/15 18:34:06 by bjankovi          #+#    #+#             */
-/*   Updated: 2025/08/15 18:34:06 by bjankovi         ###   ########.fr       */
+/*   Updated: 2026/06/21 16:45:58 by bajankov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,21 +75,6 @@ char	*getnext_strjoin(char const *s1, char const *s2)
 	new[newsize] = '\0';
 	free((void *)s1);
 	return (new);
-}
-
-char	*getnext_strchr(const char *s, int c)
-{
-	int	ii;
-
-	ii = -1;
-	while (s[++ii])
-	{
-		if (s[ii] == (char)c)
-			return ((char *)&s[ii]);
-	}
-	if (s[ii] == (char)c)
-		return ((char *)&s[ii]);
-	return (0);
 }
 
 size_t	getnext_strlen(const char *s)

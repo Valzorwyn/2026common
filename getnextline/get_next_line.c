@@ -3,19 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bjankovi <bjankovi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bajankov <bajankov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/15 18:34:01 by bjankovi          #+#    #+#             */
-/*   Updated: 2025/08/15 18:34:01 by bjankovi         ###   ########.fr       */
+/*   Updated: 2026/06/21 16:46:08 by bajankov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
+char	*getnext_strchr(const char *s, int c)
+{
+	int	ii;
+
+	ii = -1;
+	while (s[++ii])
+	{
+		if (s[ii] == (char)c)
+			return ((char *)&s[ii]);
+	}
+	if (s[ii] == (char)c)
+		return ((char *)&s[ii]);
+	return (0);
+}
+
 /*
-	Loops calling read(fd, buf, BUFFER_SIZE) and appending each chunk to the stash via getnext_strjoin
-		(which frees the old stash each time, so you never have two copies alive at once).
-	Stops as soon as a \n is found in the stash, or read returns 0 (EOF) or -1 (error).
+	Loops calling read(fd, buf, BUFFER_SIZE) 
+		and appending each chunk to the stash via getnext_strjoin
+		(which frees the old stash each time,
+		so you never have two copies alive at once).
+	Stops as soon as a \n is found in the stash,
+		or read returns 0 (EOF) or -1 (error).
 */
 
 static char	*read_until_newline(int fd, char **stash)
@@ -47,7 +65,8 @@ static char	*read_until_newline(int fd, char **stash)
 }
 
 /*
-	Scans the stash to find the end of the first line (up to and including \n, or to \0 at EOF), 
+	Scans the stash to find the end of the first line
+		(up to and including \n, or to \0 at EOF), 
 		allocates a new string, copies those characters in, and returns it.
 	The stash is untouched.
 */
