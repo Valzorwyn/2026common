@@ -1,0 +1,3 @@
+[submodule "c/push_swap"]
+	path = c/push_swap
+	url = git@github.com:frnki42/push_swap.git
